@@ -65,6 +65,10 @@ package() {
   cp -r "${selfdir}/UDK/DuetPkg/BootLoader/bin" tmp/Utilities/BootInstall || exit 1
   cp -r "${selfdir}/Utilities/CreateVault" tmp/Utilities/ || exit 1
   cp -r "${selfdir}/Utilities/LogoutHook" tmp/Utilities/ || exit 1
+  cp -r "${selfdir}/Utilities/macrecovery" tmp/Utilities/ || exit 1
+  cp -r "${selfdir}/Utilities/macserial/bin" tmp/Utilities/macserial || exit 1
+  cp "${selfdir}/Utilities/macserial/FORMAT.md" tmp/Utilities/macserial/ || exit 1
+  cp "${selfdir}/Utilities/macserial/README.md" tmp/Utilities/macserial/ || exit 1
   cp "${selfdir}/Utilities/disklabel/disklabel" tmp/Utilities/ || exit 1
   cp "${selfdir}/Utilities/icnspack/icnspack" tmp/Utilities/ || exit 1
   cp "${selfdir}/Utilities/kpdescribe/kpdescribe.sh" tmp/Utilities/ || exit 1
@@ -78,13 +82,11 @@ package() {
 cd "$(dirname "$0")" || exit 1
 ARCHS=(X64 IA32)
 SELFPKG=OpenCorePkg
-DEPNAMES=('EfiPkg' 'MacInfoPkg' 'DuetPkg')
+DEPNAMES=('DuetPkg')
 DEPURLS=(
-  'https://github.com/acidanthera/EfiPkg'
-  'https://github.com/acidanthera/MacInfoPkg'
   'https://github.com/acidanthera/DuetPkg'
 )
-DEPBRANCHES=('master' 'master' 'master')
+DEPBRANCHES=('master')
 
 export ARCHS
 export SELFPKG
@@ -112,5 +114,6 @@ if [ "$BUILD_UTILITIES" = "1" ]; then
   cd .. || exit 1
 fi
 
+./Utilities/macserial/build.tool || exit 1
 cd Library/OcConfigurationLib || exit 1
 ./CheckSchema.py OcConfigurationLib.c || exit 1
