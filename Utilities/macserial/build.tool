@@ -20,10 +20,6 @@ if [ "$(uname)" = "Darwin" ] ; then
       MACOS_MIN="10.4"
     fi
   fi
-
-  TARGET=mac
-else
-  TARGET=linux
 fi
 
 cd "$(dirname "$0")" || exit 1

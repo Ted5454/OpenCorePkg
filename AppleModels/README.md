@@ -1,7 +1,7 @@
 Apple Models
 ===========
 
-Various information about Mac hardware
+Various information about Apple hardware
 ([current database status](https://github.com/acidanthera/OpenCorePkg/blob/master/AppleModels/DataBase.md)).
 
 ## Improving database
